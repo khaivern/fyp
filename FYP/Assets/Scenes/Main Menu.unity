@@ -228,6 +228,11 @@ PrefabInstance:
       propertyPath: m_Lens.OrthographicSize
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7133325912452359607, guid: d34a5e371ec686649a874ee40b39a7fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7133325912452359609, guid: d34a5e371ec686649a874ee40b39a7fc,
         type: 3}
       propertyPath: m_ChildCameras.Array.size
@@ -261,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 7133325913020206417, guid: d34a5e371ec686649a874ee40b39a7fc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.077211
+      value: 3.0744605
       objectReference: {fileID: 0}
     - target: {fileID: 7133325913020206417, guid: d34a5e371ec686649a874ee40b39a7fc,
         type: 3}
