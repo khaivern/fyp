@@ -14,7 +14,7 @@ public class Owl : MonoBehaviour
     public LayerMask playerLayer;
     public Transform player;
     public float range = 1f;
-    
+    [SerializeField] int damage = 40;
 
 
     void Start()
@@ -64,7 +64,7 @@ public class Owl : MonoBehaviour
         Collider2D[] players = Physics2D.OverlapCircleAll(attackPoint.position, attackRad, playerLayer);
         foreach (Collider2D player in players)
         {
-            player.GetComponent<Player>().TakeDamage(30);
+            player.GetComponent<Player>().TakeDamage(damage);
         }
 
     }

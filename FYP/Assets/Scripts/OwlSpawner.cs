@@ -95,14 +95,10 @@ public class OwlSpawner : MonoBehaviour
     {
         if (collision.tag == "Player" && inSpawnArea == false)
         {
-            inSpawnArea = true;
+            //inSpawnArea = true;
             StartCoroutine(Start());
         }
-        
-
     }
-
-   
 
     IEnumerator SpawnOwls()
     {

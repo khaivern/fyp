@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float detectionRange = 3.5f;
+    [SerializeField] int damage = 60;
     Rigidbody2D myRigidBody2D;
     BoxCollider2D myFeet2D;
     Transform player;
@@ -45,13 +46,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void WithinRange()
     {
-        bool xDist = Mathf.Abs(transform.position.x - player.position.x) <= detectionRange;
-        bool yDist = Mathf.Abs(transform.position.y - player.position.y) <= detectionRange;
-
-        if (xDist && yDist)
+        float distDiff = Vector2.Distance(player.position, myRigidBody2D.position);
+        if (distDiff <= detectionRange)
         {
-
-            if (Vector2.Distance(player.position, myRigidBody2D.position) <= (detectionRange - 2.6f))
+            if (distDiff <= (detectionRange - 2.6f))
             {
                 myAnimator.SetTrigger("Attacking");
                 myRigidBody2D.velocity = Vector2.zero;
@@ -59,7 +57,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 ChasePlayer();
             }
-            
         }
         else
         {
@@ -76,18 +73,19 @@ public class EnemyMovement : MonoBehaviour
 
     private void ChasePlayer()
     {
+        // player directly above the opponent.
         if (Mathf.Abs(player.position.x - transform.position.x) < 0.2f)
         {
-
             myRigidBody2D.velocity = new Vector2(0, 0);
             return;
         }
-
+        // player is at the right of me.
         if (transform.position.x < player.position.x)
         {
             transform.localScale = new Vector2(1, 1f);
             myRigidBody2D.velocity = new Vector2(2f, 0);
         }
+        // player is at the left of me.
         else
         {
             transform.localScale = new Vector2(-1, 1f);
@@ -101,7 +99,7 @@ public class EnemyMovement : MonoBehaviour
         Collider2D[] players =  Physics2D.OverlapCircleAll(attackPoint.position, attackRad, playerLayer);
         foreach(Collider2D player in players)
         {
-            player.GetComponent<Player>().TakeDamage(30);
+            player.GetComponent<Player>().TakeDamage(damage);
         }
 
     }
