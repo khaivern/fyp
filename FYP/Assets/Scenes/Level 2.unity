@@ -11358,7 +11358,7 @@ MonoBehaviour:
     type: 3}
   player: {fileID: 0}
   isFlipped: 0
-  maxHealth: 3000
+  maxHealth: 5000
   currentHealth: 0
   healthbar: {fileID: 5989197365504111987}
   isInvulnerable: 0
@@ -11416,8 +11416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590ba6d1f90b1d54298c70523d561c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 40
-  enragedAttackDamage: 80
+  attackDamage: 200
+  enragedAttackDamage: 300
   attackRange: 1.14
   bossLRAPrefab: {fileID: 8705870146038995972, guid: e816553667bdbb746b46eb76244b98ca,
     type: 3}
