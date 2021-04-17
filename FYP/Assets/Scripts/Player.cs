@@ -180,15 +180,9 @@ public class Player : MonoBehaviour
         }
 
     }
-
+    
     private void FlipSprite()
     {
-
-        /*bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody2D.velocity.x) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed)
-        {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidbody2D.velocity.x), 1);
-        }*/
         if (myRigidbody2D.velocity.x == 0) return;
 
         if (myRigidbody2D.velocity.x > 0 && !isFacingRight)

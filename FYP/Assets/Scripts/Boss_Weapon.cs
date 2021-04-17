@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Boss_Weapon : MonoBehaviour
 {
-	public int attackDamage = 40;
-	public int enragedAttackDamage = 80;
+	public int attackDamage = 200;
+	public int enragedAttackDamage = 250;
 
 	public float attackRange = 1f;
 
@@ -19,8 +19,6 @@ public class Boss_Weapon : MonoBehaviour
 
 	public void Attack()
 	{
-
-		
 		Collider2D colInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
 		if (colInfo != null)
 		{

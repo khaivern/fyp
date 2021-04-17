@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7256699304746626696}
   - component: {fileID: 3923843373954131444}
   - component: {fileID: 1783986554}
+  - component: {fileID: -639659381568001756}
   m_Layer: 0
   m_Name: BossLRA
   m_TagString: Untagged
@@ -136,3 +137,22 @@ MonoBehaviour:
   speed: 10
   myRigidBody2D: {fileID: 7256699304746626696}
   damage: 150
+--- !u!95 &-639659381568001756
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705870146038995972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5db1da80b9d4d7e4bb5cc81fc825d920, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

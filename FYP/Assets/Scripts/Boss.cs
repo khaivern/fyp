@@ -35,7 +35,7 @@ public class Boss : MonoBehaviour
     [Header("TopBottomAtk")]
     [SerializeField] float attackSpeed;
     [SerializeField] Vector2 attackDirection;
-    private int contactDamage = 50;
+    private int contactDamage = 150;
     // Direct Attack
     [Header("DirectAttack")]
     [SerializeField] float directSpeed;
@@ -110,54 +110,28 @@ public class Boss : MonoBehaviour
 
     public void floatState()
     {
-        if (isTouchingUp && isGoingUp)
-        {
-            ChangeDirection();
-        } 
-        else if (isTouchingDown && !isGoingUp)
-        {
-            ChangeDirection();
-        }
+        if (isTouchingUp && isGoingUp) ChangeDirection(); 
+        else if (isTouchingDown && !isGoingUp) ChangeDirection();
 
         if (isTouchingSide)
         {
-            if (isFlipped)
-            {
-                SideDirection();
-            }
-            else if (!isFlipped)
-            {
-                SideDirection();
-            }
+            if (isFlipped) SideDirection();
+            else if (!isFlipped) SideDirection();
         }
-
         myRigidbody2D.velocity = floatSpeed * floatDirection;
     }
 
 
     public void TopBottomAttack()
     {
-        if (isTouchingUp && isGoingUp)
-        {
-            ChangeDirection();
-        }
-        else if (isTouchingDown && !isGoingUp)
-        {
-            ChangeDirection();
-        }
+        if (isTouchingUp && isGoingUp) ChangeDirection();
+        else if (isTouchingDown && !isGoingUp) ChangeDirection();
 
         if (isTouchingSide)
         {
-            if (isFlipped)
-            {
-                SideDirection();
-            }
-            else if (!isFlipped)
-            {
-                SideDirection();
-            }
+            if (isFlipped) SideDirection();
+            else if (!isFlipped) SideDirection();
         }
-
         myRigidbody2D.velocity = attackSpeed * floatDirection;
     }
 
@@ -242,7 +216,7 @@ public class Boss : MonoBehaviour
 
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
-        if (currentHealth <= 1500)
+        if (currentHealth <= 3500)
         {
             animator.SetBool("isEnraged", true);
 
@@ -276,20 +250,5 @@ public class Boss : MonoBehaviour
         isInvulnerable = false;
     }
 
-    // Freezes enemy from being pushed by player
-    /*private void OnCollisionStay2D(Collision2D player)
-    {
-        if (player.gameObject.CompareTag("Player"))
-        {
-            myRigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D player)
-    {
-        if (player.gameObject.CompareTag("Player"))
-        {
-            myRigidbody2D.constraints = RigidbodyConstraints2D.None;
-        }
-    }*/
+    
 }

@@ -11,8 +11,8 @@ public class OwlSpawner : MonoBehaviour
 
     bool inSpawnArea = false;
     // Spawn Positions
-    int minValue = 0;
-    int maxValue = 3;
+    int minIndex = 0;
+    int maxIndex = 3;
     Vector2 sp1 = new Vector2(19.15f, 5f);
     Vector2 sp2 = new Vector2(34.61f, 5f);
     Vector2 sp3 = new Vector2(23.04f, 5f);
@@ -65,37 +65,31 @@ public class OwlSpawner : MonoBehaviour
 
     void CheckPlayerPos()
     {
-        if (player.position.x < 18.14) 
-        {
-            return;
-        }
-        else
-        {
-            inSpawnArea = true;
-        }
-        ;
-
+        if (player.position.x < 18.14)  return;
+        else inSpawnArea = true;
+        
         if (player.position.x >= 18.14f && player.position.x < 29.57f)
         {
-            minValue = 0;
-            maxValue = 3;
+            minIndex = 0;
+            maxIndex = 3;
         }
         else if(player.position.x >= 29.57f && player.position.x < 39.79f)
         {
-            minValue = 3;
-            maxValue = 6;
+            minIndex = 3;
+            maxIndex = 6;
         }
         else if (player.position.x >= 39.79f && player.position.x < 54.7f)
         {
-            minValue = 6;
-            maxValue = 9;
+            minIndex = 6;
+            maxIndex = 9;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && inSpawnArea == false)
         {
-            //inSpawnArea = true;
+            inSpawnArea = true;
             StartCoroutine(Start());
         }
     }
@@ -104,7 +98,7 @@ public class OwlSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnRate);
         
-        GameObject owl = Instantiate(owlPrefab, spList[Random.Range(minValue, maxValue)], Quaternion.identity);
+        GameObject owl = Instantiate(owlPrefab, spList[Random.Range(minIndex, maxIndex)], Quaternion.identity);
         owl.transform.parent = transform;
     }
 }
