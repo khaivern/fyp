@@ -5,7 +5,6 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     Rigidbody2D myRigidbody2D;
-    BoxCollider2D myBoxCollider2D;
     [SerializeField] GameObject enrageVFXPrefab;
 
     [SerializeField] Transform player;
@@ -39,6 +38,7 @@ public class Boss : MonoBehaviour
     // Direct Attack
     [Header("DirectAttack")]
     [SerializeField] float directSpeed;
+    [SerializeField] GameObject slamEffect;
     Vector2 playerPos;
     private bool hasPlayerPos;
 
@@ -59,7 +59,6 @@ public class Boss : MonoBehaviour
     {
         player = FindObjectOfType<Player>().transform;
         myRigidbody2D = GetComponent<Rigidbody2D>();
-        myBoxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(currentHealth);
@@ -227,6 +226,8 @@ public class Boss : MonoBehaviour
         }
     }
 
+
+
     void Die()
     {
         GameObject deathEffectObject = Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -250,5 +251,9 @@ public class Boss : MonoBehaviour
         isInvulnerable = false;
     }
 
-    
+    public void SlamVFX()
+    {
+        GameObject slamEffectObject = Instantiate(slamEffect, transform.position, Quaternion.identity);
+        Destroy(slamEffectObject, 3f);
+    }
 }

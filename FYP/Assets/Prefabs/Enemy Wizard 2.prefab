@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed180259850068439df8d0c065393c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   deathEffect: {fileID: 3085914081505513357, guid: ffc2196c78ba6b640a373ec7cc8bdf48,
     type: 3}
 --- !u!61 &7663685005676431937
@@ -121,13 +121,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5369424122718624988}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.17985803, y: -0.2798596}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -138,7 +138,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.87, y: 3.5}
+  m_Size: {x: 1.4319755, y: 2.4605255}
   m_EdgeRadius: 0
 --- !u!114 &-7584839754500132835
 MonoBehaviour:

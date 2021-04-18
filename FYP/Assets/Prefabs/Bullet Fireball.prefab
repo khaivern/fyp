@@ -165,6 +165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   myRigidBody2D: {fileID: 3035721706151576389}
-  damage: 100
+  damage: 50
   bulletPrefab: {fileID: 0}
   myAnimator: {fileID: 3035721706151576388}
