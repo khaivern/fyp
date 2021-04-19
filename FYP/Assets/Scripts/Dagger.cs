@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Dagger : MonoBehaviour
 {
-    Vector2 moveDirection;
-    float moveSpeed;
+    Vector2 direction;
+    float speed;
 
     public int damage = 100;
 
@@ -17,13 +17,13 @@ public class Dagger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 25f;
+        speed = 25f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,7 +38,7 @@ public class Dagger : MonoBehaviour
 
     public void SetMoveDirection(Vector2 direction)
     {
-        moveDirection = direction;
+        this.direction = direction;
     }
 
     void SetInactive()

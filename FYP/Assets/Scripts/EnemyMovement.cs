@@ -8,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float detectionRange = 3.5f;
     [SerializeField] int damage = 60;
     Rigidbody2D myRigidBody2D;
-    BoxCollider2D myFeet2D;
     Transform player;
     Animator myAnimator;
 
@@ -22,7 +21,6 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         myRigidBody2D = GetComponent<Rigidbody2D>();
-        myFeet2D = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         myAnimator = GetComponent<Animator>();
     }

@@ -200,7 +200,6 @@ MonoBehaviour:
   blinkPrefab: {fileID: 8004656650525095189, guid: 4869729501a93794b9af47cc68536b26,
     type: 3}
   distance: 9500
-  myGameSession: {fileID: 0}
 --- !u!61 &563299431
 BoxCollider2D:
   m_ObjectHideFlags: 0

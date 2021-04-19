@@ -5,23 +5,22 @@ using Pathfinding;
 
 public class BossAI : MonoBehaviour
 {
+    // Cached Components.
+    [SerializeField] Transform player; // Player position.
+    Path myPath;
+    Seeker mySeeker;
+    Rigidbody2D myRigidBody2D;
+    Animator myAnimator;
 
-    [SerializeField] Transform target;
-
+    // Config
     [SerializeField] float speed = 200f;
-    [SerializeField] float nextWaypointDistance = 3f;
-    public Transform bossGFX;
-
-    Path path;
+    bool reachEnd = false;
     int currentWayPoint = 0;
-    bool reachEndOfPath = false;
+    [SerializeField] float nextWaypointDistance = 3f; 
+    [SerializeField] Transform boss;
 
-    Seeker seeker;
-    Rigidbody2D rb;
-    Animator anim;
-
-    float offsetx = 5f;
-    float offsety = 3.5f;
+    float offsetX = 5f;
+    float offsetY = 3.5f;
 
     // Timer and stage variables.
     bool secondStage = false;
@@ -36,22 +35,21 @@ public class BossAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        boss = this.gameObject.transform.GetChild(0).transform;
+        mySeeker = GetComponent<Seeker>();
+        myRigidBody2D = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponentInChildren<Animator>();
 
         InvokeRepeating("UpdatePath", 0f, .5f);
-
-
     }
 
     void UpdatePath()
     {
-        Vector3 destination = new Vector3(target.position.x + offsetx, target.position.y + offsety);
-        if (seeker.IsDone())
+        Vector3 destination = new Vector3(player.position.x + offsetX, player.position.y + offsetY);
+        if (mySeeker.IsDone())
         {
-            seeker.StartPath(rb.position, destination, OnPathComplete);
+            mySeeker.StartPath(myRigidBody2D.position, destination, OnPathComplete);
         }
     }
 
@@ -59,8 +57,8 @@ public class BossAI : MonoBehaviour
     {
         if (!p.error)
         {
-            path = p;
-            currentWayPoint = 0;
+            myPath = p;
+            currentWayPoint = 0; //reset progress
         }
     }
 
@@ -75,53 +73,51 @@ public class BossAI : MonoBehaviour
         StageManager();
 
         StageChecker();
-
+        LookAtPlayer();
     }
 
     private void Movement()
     {
-        if (path == null) return;
+        if (myPath == null) return;
 
-        if (currentWayPoint >= path.vectorPath.Count)
+        if (currentWayPoint >= myPath.vectorPath.Count)
         {
-            reachEndOfPath = true;
-         
+            reachEnd = true;
             return;
         }
         else
         {
-            reachEndOfPath = false;
+            reachEnd = false;
         }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+        Vector2 direction = ((Vector2)myPath.vectorPath[currentWayPoint] - myRigidBody2D.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
-        rb.AddForce(force);
+        myRigidBody2D.AddForce(force);
 
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
+        float distance = Vector2.Distance(myRigidBody2D.position, myPath.vectorPath[currentWayPoint]);
 
         if (distance < nextWaypointDistance)
         {
             currentWayPoint++;
         }
 
-        if (force.x >= Mathf.Epsilon)
-        {
-            bossGFX.localScale = new Vector3(1f, 1f, 1f);
-            offsetx = 5f;
-        }
-        else if (force.x <= Mathf.Epsilon)
-        {
-            bossGFX.localScale = new Vector3(-1f, 1f, 1f);
-            offsetx = -5f;
-        }
+    }
+
+    void LookAtPlayer()
+    {
+        if (boss.transform.position.x > player.position.x) boss.localScale = new Vector2(-1f, 1f);
+        else boss.localScale = new Vector2(1f, 1f);
+        
+        if (myRigidBody2D.velocity.x >= Mathf.Epsilon) offsetX = 5f;
+        else offsetX = -5f;        
     }
 
     void Fire()
     {
-        if (reachEndOfPath)
+        if (reachEnd)
         {
-            anim.SetTrigger("Attack");
+            myAnimator.SetTrigger("Attack");
         }
     }
 
@@ -155,14 +151,14 @@ public class BossAI : MonoBehaviour
     {
         if (secondStage)
         {
-            anim.SetBool("Special", true);
+            myAnimator.SetBool("Special", true);
 
         }
         else if (finalStage)
         {
             hasPassed = true;
 
-            anim.SetBool("Special", false);
+            myAnimator.SetBool("Special", false);
             if (clone1 == null || clone2 == null) return;
             clone1.SetActive(true);
             clone2.SetActive(true);
@@ -174,12 +170,12 @@ public class BossAI : MonoBehaviour
     {
         if(collision.collider.tag == "Player")
         {
-            rb.velocity = new Vector2(0f, 0f);
+            myRigidBody2D.velocity = new Vector2(0f, 0f);
         }
         else
         {
             Vector2 speed = new Vector2(Random.Range(0, 2) == 1 ? -5f : 5f, Random.Range(0, 2) == 1 ? -2f : 2f);
-            rb.velocity = speed;
+            myRigidBody2D.velocity = speed;
         }
         
     }
