@@ -7,27 +7,31 @@ public class Weapon : MonoBehaviour
     // Config
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletPrefab;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    Coroutine firingCoroutine;
+    float fireRate = 0.3f;
+    
     // Update is called once per frame
     void Update()
     {
         
         if (Input.GetButtonDown("Fire1"))
         {
-            
-            Shoot();
+            firingCoroutine = StartCoroutine(Shoot());
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            StopCoroutine(firingCoroutine);
         }
     }
 
-    private void Shoot()
+    IEnumerator Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        while (true)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            yield return new WaitForSeconds(fireRate);
+        }
+        
     }
     
 }

@@ -13,15 +13,23 @@ public class GameSession : MonoBehaviour
     public int currentHealth;
     public HealthBar healthbar;
 
-
+    // Score
     [SerializeField] int score = 0;
     [SerializeField] TextMeshProUGUI scoresText;
 
     // Skill
     public Image image;
     public float cooldown = 5f;
-
     bool onCooldown;
+
+    // Damage
+    bool hasDD = false;
+    [SerializeField] Bullet bullet;
+    public int damageValue;
+
+    // Skins
+    bool isSoldier = false;
+    bool isKing = false;
 
     private void Awake()
     {
@@ -44,9 +52,41 @@ public class GameSession : MonoBehaviour
         // score initialisation
         scoresText.text = score.ToString();
     }
+
     private void Update()
     {
         CheckIfSkillUsed();
+        damageValue = bullet.GetDamage();
+    }
+
+    public bool GetDD()
+    {
+        return hasDD;
+    }
+
+    public void SetDD(bool data)
+    {
+        hasDD = data;
+    }
+
+    public bool GetKing()
+    {
+        return isKing;
+    }
+
+    public void SetKing(bool data)
+    {
+        isKing = data;
+    }
+
+    public bool GetSoldier()
+    {
+        return isSoldier;
+    }
+
+    public void SetSoldier(bool data)
+    {
+        isSoldier = data;
     }
 
     public void IncreaseMaxHealth(int maxHealth)
@@ -90,17 +130,9 @@ public class GameSession : MonoBehaviour
 
     void CheckIfSkillUsed()
     {
-        
-        if (onCooldown)
-        {
-            image.fillAmount -= 1 / cooldown * Time.deltaTime;
-        }
+        if (onCooldown)  image.fillAmount -= 1 / cooldown * Time.deltaTime; 
 
-        if (image.fillAmount <= 0)
-        {
-            
-            onCooldown = false;
-        }
+        if (image.fillAmount <= 0) onCooldown = false; 
     }
 
     public void SetSkillCooldown(float cooldown)
@@ -108,7 +140,6 @@ public class GameSession : MonoBehaviour
         image.fillAmount = 1;
         this.cooldown = cooldown;
         onCooldown = true;
-
     }
 
     public bool GetCooldown()

@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
     {
         if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
         {
-            TakeDamage(10);
+            TakeDamage(30);
         }
     }
 

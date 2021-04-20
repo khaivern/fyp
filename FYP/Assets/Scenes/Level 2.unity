@@ -11394,16 +11394,16 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979458708}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -11482,7 +11482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590ba6d1f90b1d54298c70523d561c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 200
+  attackDamage: 150
   enragedAttackDamage: 300
   attackRange: 1.14
   bossLRAPrefab: {fileID: 8705870146038995972, guid: e816553667bdbb746b46eb76244b98ca,
@@ -12846,7 +12846,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133325912874268752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.176422, y: 2.3271418, z: -10}
+  m_LocalPosition: {x: -38.176422, y: 2.3271499, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7133325913910268831}

@@ -29,7 +29,21 @@ public class ChangeSkin : MonoBehaviour
     private void Update()
     {
         myGameSession = FindObjectOfType<GameSession>();
+        CheckPurchases();
         score = myGameSession.GetScore();
+    }
+
+    public void CheckPurchases()
+    {
+        if (myGameSession.GetKing())
+        {
+            GetComponent<Animator>().runtimeAnimatorController = kingAnim;
+        } 
+        else if (myGameSession.GetSoldier())
+        {
+            GetComponent<Animator>().runtimeAnimatorController = soldierAnim;
+        }
+        
     }
 
     public void SoldierSkin()
@@ -39,12 +53,13 @@ public class ChangeSkin : MonoBehaviour
             // Debug.Log("I am short by " + (shop.GetSoldierCost() - score));
             shortBy = shop.GetSoldierCost() - score;
             shop.SetReceipt(shortBy);
-            return;
         }
         else
         {
             myGameSession.ReduceScore(shop.GetSoldierCost());
             GetComponent<Animator>().runtimeAnimatorController = soldierAnim;
+            myGameSession.SetKing(false);
+            myGameSession.SetSoldier(true);
         }
     }
 
@@ -55,13 +70,13 @@ public class ChangeSkin : MonoBehaviour
             // Debug.Log("I am short by " + (shop.GetKingCost() - score));
             shortBy = shop.GetKingCost() - score;
             shop.SetReceipt(shortBy);
-            return;
-
         }
         else
         {
             myGameSession.ReduceScore(shop.GetKingCost());
             GetComponent<Animator>().runtimeAnimatorController = kingAnim;
+            myGameSession.SetKing(true);
+            myGameSession.SetSoldier(false);
         }
     }
 
@@ -72,12 +87,11 @@ public class ChangeSkin : MonoBehaviour
             // Debug.Log("I am short by " + (shop.GetDmgUpCost() - score));
             shortBy = shop.GetDmgUpCost() - score;
             shop.SetReceipt(shortBy);
-            return;
         }
         else
         {
             myGameSession.ReduceScore(shop.GetDmgUpCost());
-            bullet.SetDamage(200);
+            myGameSession.SetDD(true);
         }
     }
 
@@ -88,7 +102,6 @@ public class ChangeSkin : MonoBehaviour
             // Debug.Log("I am short by " + (shop.GetHpUpCost() - score));
             shortBy = shop.GetHpUpCost() - score;
             shop.SetReceipt(shortBy);
-            return;
         }
         else
         {
