@@ -93,7 +93,8 @@ public class ChangeSkin : MonoBehaviour
         else
         {
             myGameSession.ReduceScore(shop.GetHpUpCost());
-            player.IncreaseMaxHealth(1000);
+            myGameSession.IncreaseMaxHealth(1000); //player
+
         }
     }
 }

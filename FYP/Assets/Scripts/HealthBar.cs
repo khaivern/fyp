@@ -22,11 +22,5 @@ public class HealthBar : MonoBehaviour
         slider.value = health;
     }
 
-    private void Update()
-    {
-        if(slider.value <=0)
-        {
-            Destroy(gameObject);
-        }
-    }
+   
 }

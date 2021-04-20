@@ -8,7 +8,12 @@ using TMPro;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int health = 1000;
+    // Health
+    [SerializeField] int maxHealth = 500;
+    public int currentHealth;
+    public HealthBar healthbar;
+
+
     [SerializeField] int score = 0;
     [SerializeField] TextMeshProUGUI scoresText;
 
@@ -31,11 +36,44 @@ public class GameSession : MonoBehaviour
     }
     void Start()
     {
+        // health initialisation
+        healthbar = FindObjectOfType<HealthBar>();
+        currentHealth = maxHealth;
+        healthbar.SetMaxHealth(currentHealth);
+
+        // score initialisation
         scoresText.text = score.ToString();
     }
     private void Update()
     {
         CheckIfSkillUsed();
+    }
+
+    public void IncreaseMaxHealth(int maxHealth)
+    {
+        this.maxHealth = maxHealth;
+        if (currentHealth + 500 > 1000)
+        {
+            currentHealth = 1000;
+        }
+        else
+        {
+            currentHealth += 500;
+        }
+        healthbar.SetMaxHealth(maxHealth);
+        healthbar.SetHealth(currentHealth);
+
+    }
+
+    public void ReduceHealth(int damage)
+    {
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
     }
 
     public void AddToScore(int pointsToAdd)
@@ -86,7 +124,15 @@ public class GameSession : MonoBehaviour
     public void ProcessPlayerDeath()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        healthbar.SetMaxHealth(maxHealth);
+        currentHealth = maxHealth;
+        healthbar.gameObject.SetActive(true);
+    }
+
+    public void HideHealthBar()
+    {
+        healthbar.gameObject.SetActive(false);
     }
 
     public void LoadMainMenu()

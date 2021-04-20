@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] Vector2 deathKick = new Vector2(25, 25);
     [SerializeField] Vector2 dmgKick = new Vector2(0, 50);
-    [SerializeField] int maxHealth = 500;
+    /*[SerializeField] int maxHealth = 500;
     [SerializeField] int currentHealth;
-    public HealthBar healthbar;
+    public HealthBar healthbar;*/
     [SerializeField] GameObject blinkPrefab;
     [SerializeField] float distance = 10000f;
 
@@ -38,16 +38,16 @@ public class Player : MonoBehaviour
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         myFeetCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = myRigidbody2D.gravityScale;
-        healthbar = FindObjectOfType<HealthBar>();
+        /*healthbar = FindObjectOfType<HealthBar>();
         currentHealth = maxHealth;
-        healthbar.SetMaxHealth(currentHealth);
+        healthbar.SetMaxHealth(currentHealth);*/
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthbar = FindObjectOfType<HealthBar>();
+        //healthbar = FindObjectOfType<HealthBar>();
         myGameSession = FindObjectOfType<GameSession>();
 
         if (!isAlive) { return; }
@@ -59,13 +59,20 @@ public class Player : MonoBehaviour
         SpecialSkill();
     }
 
-    public void IncreaseMaxHealth(int maxHealth)
+    /*public void IncreaseMaxHealth(int maxHealth)
     {
-        healthbar.SetMaxHealth(currentHealth);
         this.maxHealth = maxHealth;
-        currentHealth += 500;
-        
-    }
+        if (currentHealth + 500 > 1000)
+        {
+            currentHealth = 1000;
+        } else
+        {
+            currentHealth += 500;
+        }
+        healthbar.SetMaxHealth(maxHealth);
+        healthbar.SetHealth(currentHealth);
+
+    }*/
 
     void SpecialSkill()
     {
@@ -73,9 +80,7 @@ public class Player : MonoBehaviour
         {
             if (myGameSession.GetCooldown())
             {
-                Debug.Log(myGameSession.GetCooldown());
                 return;
-
             }
             myGameSession.SetSkillCooldown(5f);
             
@@ -106,10 +111,11 @@ public class Player : MonoBehaviour
     {
         if (isInvulnerable) return;
         myRigidbody2D.velocity = dmgKick;
-        currentHealth -= damage;
-        healthbar.SetHealth(currentHealth);
+        myGameSession.ReduceHealth(damage);
+        /*currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);*/
         StartCoroutine(DamageFlicker());
-        if(currentHealth <= 0)
+        if(myGameSession.GetHealth() <= 0)
         {
             StartCoroutine(ProcessDeathWDelay()); ;
         }
@@ -146,13 +152,14 @@ public class Player : MonoBehaviour
 
     IEnumerator ProcessDeathWDelay()
     {
+        myGameSession.HideHealthBar();
         isInvulnerable = true;
         isAlive = false;
         myAnimator.SetTrigger("Dying");
         myRigidbody2D.velocity = deathKick;
         yield return new  WaitForSeconds(2f);
         isInvulnerable = false;
-        FindObjectOfType<GameSession>().ProcessPlayerDeath();
+        myGameSession.ProcessPlayerDeath();
     }
 
     private void Run()
@@ -195,11 +202,8 @@ public class Player : MonoBehaviour
             transform.Rotate(0, 180f, 0);
             isFacingRight = !isFacingRight;
         }
-
     }
-
     
-
     private void ClimbingLadder()
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
