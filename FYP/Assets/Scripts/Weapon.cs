@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (FindObjectOfType<GameSession>().GetPressed()) return;
         if (Input.GetButtonDown("Fire1"))
         {
             firingCoroutine = StartCoroutine(Shoot());

@@ -158,4 +158,4 @@ MonoBehaviour:
   expEffect: {fileID: 8927187812056037298, guid: e2556da2a5a3df044bea4d901a57cb2a,
     type: 3}
   impactSound: {fileID: 8300000, guid: ac72106b30d0ef546b8f85c9295bccf6, type: 3}
-  impactVol: 0.049
+  impactVol: 0.011

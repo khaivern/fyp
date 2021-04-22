@@ -194,9 +194,6 @@ MonoBehaviour:
   climbSpeed: 5
   deathKick: {x: 0, y: 25}
   dmgKick: {x: 0, y: 20}
-  maxHealth: 500
-  currentHealth: 0
-  healthbar: {fileID: 0}
   blinkPrefab: {fileID: 8004656650525095189, guid: 4869729501a93794b9af47cc68536b26,
     type: 3}
   distance: 9500

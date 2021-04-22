@@ -17,17 +17,20 @@ public class Bullet : MonoBehaviour
         myRigidBody2D.velocity = transform.right * speed ;
         myGameSession = FindObjectOfType<GameSession>();
     }
-    private void Update()
-    {
-        if (myGameSession.GetDD())
-        {
-            damage = 100;
-        }
-    }
-
+  
     public int GetDamage()
     {
-        return damage;
+        if (FindObjectOfType<GameSession>().GetDD())
+        {
+            damage = 100;
+            return damage;
+        }
+        else
+        {
+            damage = 50;
+            return damage;
+        }
+        
     }
 
 

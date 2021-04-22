@@ -154,6 +154,7 @@ public class Boss : MonoBehaviour
             hasPlayerPos = false;
             animator.SetTrigger("Slam");
         }
+        
     }
 
     void ChangeDirection()

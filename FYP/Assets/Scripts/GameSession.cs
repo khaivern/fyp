@@ -12,6 +12,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] int maxHealth = 500;
     public int currentHealth;
     public HealthBar healthbar;
+    public TextMeshProUGUI hitPointsText;
 
     // Score
     [SerializeField] int score = 0;
@@ -25,11 +26,15 @@ public class GameSession : MonoBehaviour
     // Damage
     bool hasDD = false;
     [SerializeField] Bullet bullet;
-    public int damageValue;
+    [SerializeField] TextMeshProUGUI damageText;
 
     // Skins
     bool isSoldier = false;
     bool isKing = false;
+
+    // Options
+    public GameObject options;
+    bool pressed = false;
 
     private void Awake()
     {
@@ -48,15 +53,43 @@ public class GameSession : MonoBehaviour
         healthbar = FindObjectOfType<HealthBar>();
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(currentHealth);
+        hitPointsText.text = currentHealth.ToString();
 
         // score initialisation
         scoresText.text = score.ToString();
+
+        // option initialistation
+        options.SetActive(false);
     }
 
     private void Update()
     {
         CheckIfSkillUsed();
-        damageValue = bullet.GetDamage();
+        damageText.text = bullet.GetDamage().ToString();
+        hitPointsText.text = currentHealth.ToString();
+        CheckForOptionClick();
+    }
+
+
+    private void CheckForOptionClick()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !pressed)
+        {
+            Time.timeScale = 0f;
+            options.SetActive(true);
+            pressed = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && pressed)
+        {
+            Time.timeScale = 1f;
+            options.SetActive(false);
+            pressed = false;
+        }
+    }
+
+    public bool GetPressed()
+    {
+        return pressed;
     }
 
     public bool GetDD()
@@ -102,6 +135,7 @@ public class GameSession : MonoBehaviour
         }
         healthbar.SetMaxHealth(maxHealth);
         healthbar.SetHealth(currentHealth);
+        hitPointsText.text = currentHealth.ToString();
 
     }
 
@@ -109,6 +143,7 @@ public class GameSession : MonoBehaviour
     {
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
+        hitPointsText.text = currentHealth.ToString();
     }
 
     public int GetHealth()
@@ -157,6 +192,7 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //Destroy(gameObject);
         healthbar.SetMaxHealth(maxHealth);
+        hitPointsText.text = currentHealth.ToString();
         currentHealth = maxHealth;
         healthbar.gameObject.SetActive(true);
     }
@@ -166,17 +202,5 @@ public class GameSession : MonoBehaviour
         healthbar.gameObject.SetActive(false);
     }
 
-    public void LoadMainMenu()
-    {
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene(0);
-    }
-
-    public void CloseGame()
-    {
-        Time.timeScale = 1f;
-
-        Application.Quit();
-    }
+    
 }
