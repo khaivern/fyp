@@ -4,22 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
-    private void Awake()
-    {
-        SetUpSingleton();
-    }
-
-    void SetUpSingleton()
-    {
-        if (FindObjectsOfType(GetType()).Length > 1)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+   
     // Start is called before the first frame update
     public void LoadMainMenu()
     {

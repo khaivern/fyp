@@ -45,8 +45,5 @@ public class Options : MonoBehaviour
         }
     }
 
-    public void SetDefault()
-    {
-        GetComponent<AudioSource>().volume = defaultVolume;
-    }
+    
 }
