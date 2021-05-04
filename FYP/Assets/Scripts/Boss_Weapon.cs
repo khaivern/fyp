@@ -17,6 +17,9 @@ public class Boss_Weapon : MonoBehaviour
 	[SerializeField] Transform attackPoint;
 	[SerializeField] LayerMask playerLayer;
 
+	//Audio
+	[SerializeField] AudioClip LRA;
+	[SerializeField] [Range(0, 1)] float LRAVol = 0.1f;
 	public void Attack()
 	{
 		Collider2D colInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
@@ -36,6 +39,8 @@ public class Boss_Weapon : MonoBehaviour
     }
     public void EnragedAttackSwipe()
     {
+		AudioSource.PlayClipAtPoint(LRA, Camera.main.transform.position, LRAVol);
 		Instantiate(bossLRAPrefab, firePoint.transform.position, transform.rotation);
+
 	}
 }

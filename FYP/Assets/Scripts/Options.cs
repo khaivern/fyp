@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Options : MonoBehaviour
 {
     [SerializeField] Slider volume;
-    [SerializeField] float defaultVolume = 0.5f;
+    [SerializeField] float defaultVolume = 0.2f;
     // Start is called before the first frame update
     private void Awake()
     {

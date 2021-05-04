@@ -144,3 +144,9 @@ MonoBehaviour:
   health: 50
   deathEffect: {fileID: 3085914081505513357, guid: ffc2196c78ba6b640a373ec7cc8bdf48,
     type: 3}
+  offset: {x: 0, y: 0.91, z: 0}
+  localScale: {x: 1, y: 1, z: 1}
+  FloatingHP: {fileID: 2241437416337915800, guid: 75ee879235e63024788e80942ae1cbe2,
+    type: 3}
+  deathSound: {fileID: 8300000, guid: 5fdb461555f214ae3854e33eaa45ee3f, type: 3}
+  deathVol: 0.036

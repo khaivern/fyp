@@ -197,6 +197,8 @@ MonoBehaviour:
   blinkPrefab: {fileID: 8004656650525095189, guid: 4869729501a93794b9af47cc68536b26,
     type: 3}
   distance: 9500
+  damageSound: {fileID: 8300000, guid: 80d5b0dced6d747f8b75945c92fd0875, type: 3}
+  damageVol: 0.1
 --- !u!61 &563299431
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238,6 +240,8 @@ MonoBehaviour:
   firePoint: {fileID: 575426473}
   bulletPrefab: {fileID: 3035721706151576386, guid: 7c82528a0e3c67f4180e01ae1c6dc869,
     type: 3}
+  shotSound: {fileID: 8300000, guid: 806b3206fbe14478a85da553f4920da2, type: 3}
+  shotVol: 0.043
 --- !u!61 &8366275698432573556
 BoxCollider2D:
   m_ObjectHideFlags: 0

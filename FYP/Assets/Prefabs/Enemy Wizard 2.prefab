@@ -114,6 +114,12 @@ MonoBehaviour:
   health: 50
   deathEffect: {fileID: 3085914081505513357, guid: ffc2196c78ba6b640a373ec7cc8bdf48,
     type: 3}
+  offset: {x: 0, y: 1.3, z: 0}
+  localScale: {x: 3, y: 3, z: 3}
+  FloatingHP: {fileID: 2241437416337915800, guid: 75ee879235e63024788e80942ae1cbe2,
+    type: 3}
+  deathSound: {fileID: 8300000, guid: 5fdb461555f214ae3854e33eaa45ee3f, type: 3}
+  deathVol: 0
 --- !u!61 &7663685005676431937
 BoxCollider2D:
   m_ObjectHideFlags: 0

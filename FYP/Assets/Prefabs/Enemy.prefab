@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5472024756021171553}
   - component: {fileID: 547957473}
   - component: {fileID: 4436308685549098315}
+  - component: {fileID: 1147161752}
   m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
@@ -63,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 5472024756021171558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.15, y: -1.24, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 1504905359}
   m_Father: {fileID: 0}
@@ -237,7 +238,29 @@ MonoBehaviour:
   health: 200
   deathEffect: {fileID: 3085914081505513357, guid: ffc2196c78ba6b640a373ec7cc8bdf48,
     type: 3}
+  offset: {x: 0.15, y: 0.91, z: 0}
+  localScale: {x: 1, y: 1, z: 1}
+  FloatingHP: {fileID: 2241437416337915800, guid: 75ee879235e63024788e80942ae1cbe2,
+    type: 3}
+  deathSound: {fileID: 8300000, guid: 5fdb461555f214ae3854e33eaa45ee3f, type: 3}
+  deathVol: 0.036
 --- !u!58 &4436308685549098315
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5472024756021171558}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5659287}
+  serializedVersion: 2
+  m_Radius: 0.19597602
+--- !u!58 &1147161752
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

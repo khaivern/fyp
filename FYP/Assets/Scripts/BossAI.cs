@@ -126,7 +126,6 @@ public class BossAI : MonoBehaviour
     void StageChecker()
     {
         float timeLeft = myTimer.GetComponent<Timer>().GetTime();
-            // Debug.Log("time left " + timeLeft + " hasPassed bool = " + hasPassed);
 
         if (timeLeft <= 0 && hasPassed)
         {

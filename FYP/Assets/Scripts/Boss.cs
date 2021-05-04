@@ -54,6 +54,13 @@ public class Boss : MonoBehaviour
     private bool isTouchingSide;
     private bool isGoingUp = true;
 
+    //Audio
+    [Header("Audio")]
+    [SerializeField] AudioClip impactSound;
+    [SerializeField] [Range(0, 1)] float impactVol = 0.1f;
+    [SerializeField] AudioClip slamSound;
+    [SerializeField] [Range(0, 1)] float slamVol = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,7 +92,7 @@ public class Boss : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-
+            
             player.TakeDamage(contactDamage);
         }
     }
@@ -123,8 +130,16 @@ public class Boss : MonoBehaviour
 
     public void TopBottomAttack()
     {
-        if (isTouchingUp && isGoingUp) ChangeDirection();
-        else if (isTouchingDown && !isGoingUp) ChangeDirection();
+        if (isTouchingUp && isGoingUp)
+        {
+            ChangeDirection();
+            ImpactSFX();
+        }
+        else if (isTouchingDown && !isGoingUp)
+        {
+            ChangeDirection();
+            ImpactSFX();
+        }
 
         if (isTouchingSide)
         {
@@ -132,6 +147,11 @@ public class Boss : MonoBehaviour
             else if (!isFlipped) SideDirection();
         }
         myRigidbody2D.velocity = attackSpeed * floatDirection;
+    }
+
+    void ImpactSFX()
+    {
+        AudioSource.PlayClipAtPoint(impactSound, Camera.main.transform.position, impactVol);
     }
 
     public void DirectAttack()
@@ -153,6 +173,7 @@ public class Boss : MonoBehaviour
             myRigidbody2D.velocity = Vector2.zero;
             hasPlayerPos = false;
             animator.SetTrigger("Slam");
+            AudioSource.PlayClipAtPoint(slamSound, Camera.main.transform.position, slamVol);
         }
         
     }
@@ -250,6 +271,7 @@ public class Boss : MonoBehaviour
     {
         this.transform.GetChild(0).gameObject.SetActive(true);
         isInvulnerable = false;
+        gameObject.layer = 12;
     }
 
     public void SlamVFX()

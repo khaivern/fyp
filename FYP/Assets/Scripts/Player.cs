@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     public HealthBar healthbar;*/
     [SerializeField] GameObject blinkPrefab;
     [SerializeField] float distance = 10000f;
-
+    [SerializeField] AudioClip damageSound;
+    [SerializeField] [Range(0, 1)] float damageVol = 0.1f;
     // State
     bool isAlive = true;
     bool isFacingRight = true;
@@ -110,6 +111,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isInvulnerable) return;
+        AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position, damageVol);
         myRigidbody2D.velocity = dmgKick;
         myGameSession.ReduceHealth(damage);
         /*currentHealth -= damage;
