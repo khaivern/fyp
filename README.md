@@ -1,2 +1,2 @@
 # fyp
-my software code
+my software code for my Game With AI opponent FYP
